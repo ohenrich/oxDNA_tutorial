@@ -115,7 +115,7 @@
 \item DNA loop around a nucleosome core particle contains 147 bps
 \item Smallest loop in chromatin fibre consists of $5\times10^4$ bps
 \item Atomistic simulation of DNA can model 3,000 bps (probably less) and typically resolve times on the $\mu$s-scale  
-\item Coarse-grained models target much larger time and length scales in the range of ms and Mbps 
+\item \textbf{Coarse-grained models} target much \textbf{larger time and length scales} in the range of ms and Mbps 
 \end{itemize}
 
 \begin{center}
@@ -130,16 +130,16 @@ From DNA to chromatin \hspace{2.75cm} A-DNA, B-DNA, Z-DNA
 \frametitle{Overview}
 
 \begin{itemize}
-\item Each nucleotide is described as rigid body
-\item 3 interaction sites for backbone, stacking and hydrogen-bonding
-\item 7 effective interactions between nucleotides
+\item \textbf{Each nucleotide} is described as \textbf{rigid body}
+\item \textbf{3 interaction} sites for backbone, stacking and hydrogen-bonding
+\item \textbf{7 effective interactions} between nucleotides
 \begin{itemize}
 \item Bonded interaction for backbone connectivity
 \item 6 pair interactions for excluded volume, stacking, cross-stacking, coaxial stacking, hydrogen-bonding and electrostatic interaction
 \end{itemize}
-\item oxDNA: 13 DOF per nucleotide\\
+\item \textbf{oxDNA: 13 DOF per nucleotide}\\
 3 positions, 3 translational momenta, 3 angular momenta, 1 unit quaternion (4 components)
-\item Atomistic simulation (e.g. thymine): around 200 DOF per nucleotide\\
+\item \textbf{Atomistic simulation} (e.g. thymine): around \textbf{200 DOF per nucleotide}\\
 34 atoms per nucleotide, each with 3 positions and 3 momenta
 \end{itemize}
 
@@ -202,7 +202,7 @@ $\bm{r}_{base}=\bm{r}_{COM} + 0.4\, \bm{b}$
 
 \begin{columns}
 \begin{column}{0.56\textwidth}
-Relative distance vectors are defined between two nucleotides $i$ and $j$
+\textbf{Relative distance vectors} are defined between two nucleotides $i$ and $j$
 \begin{itemize}
 \setlength\itemsep{3pt}
 \item backbone interaction sites\\
@@ -215,7 +215,7 @@ $\bm{r}_{base, ij}=\bm{r}_{base,i} - \bm{r}_{base,j}$
 $\bm{r}_{back-base, ij}=\bm{r}_{back,i} - \bm{r}_{base,j}$
 $\bm{r}_{base-back, ij}=\bm{r}_{base,i} - \bm{r}_{back,j}$
 \end{itemize}
-Relative angles are defined using the above vectors,  the base vector $\bm{b}$ and base normal $\bm{n}$ 
+\textbf{Relative angles} are defined using the above vectors, the base vector $\bm{b}$ and base normal $\bm{n}$ 
 \vspace*{0.25cm}
 \begin{itemize}
 \item[] $\cos(\theta_1) = -\,\hat{\bm{b}}_i \cdot \hat{\bm{b}}_j$
@@ -236,7 +236,7 @@ Relative angles are defined using the above vectors,  the base vector $\bm{b}$ a
 
 \begin{frame}
 \frametitle{Potential Forms}
-Elementary potentials are used, which take distances or angles as arguments.\\[10pt]
+\textbf{Elementary potentials} are used, which take distances or angles as arguments.\\[10pt]
 \begin{itemize}
 \setlength\itemsep{7pt}
 \item FENE springs for backbone connectivity\\
@@ -307,21 +307,21 @@ The above potentials are used directly or in angular and radial modulation facto
 
 \begin{frame}
 \frametitle{Interactions}
-The oxDNA2 potential consists of 1 bonded and 6 pair interactions.
+The \textbf{oxDNA2 potential} consists of \textbf{1 bonded} and \textbf{6 pair interactions}.
 \vspace*{0.25cm}
 \begin{itemize}
 \setlength\itemsep{5pt}
 \small
-\item Backbone connectivity (bonded): $V_{backbone} = V_{FENE}(.)$
-\item Excluded volume (pair)\\
+\item \textbf{Backbone connectivity} (bonded): $V_{backbone} = V_{FENE}(.)$
+\item \textbf{Excluded volume} (pair)\\
 $V_{excv} = f_3(r_{back-back}, ..)+f_3(r_{back-base}, ..)+f_3(r_{base-back}, ..)+f_3(r_{base-base}, ..)$
-\item Stacking (pair): $V_{stack} = f_1(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_5(\cdot)\times f_5(\cdot)$
-\item Hydrogen-bonding (pair): $V_{HB} = f_1(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)$
-\item Cross-stacking (pair)\\
+\item \textbf{Stacking} (pair): $V_{stack} = f_1(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_5(\cdot)\times f_5(\cdot)$
+\item \textbf{Hydrogen-bonding} (pair): $V_{HB} = f_1(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)$
+\item \textbf{Cross-stacking} (pair)\\
 $V_{x-stack} = f_2(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times f_4(\cdot)\times\Big\{f_4(\cdot)+ f_4(\cdot)\Big\} \times \Big\{f_4(\cdot)+ f_4(\cdot)\Big\} \times\Big\{f_4(\cdot)+ f_4(\cdot)\Big\}$
-\item Coaxial stacking (pair)\\
+\item \textbf{Coaxial stacking} (pair)\\
 $V_{coaxial-stack} = f_2(\cdot)\times f_4(\cdot)\times \times\Big\{f_4(\cdot)+ f_6(\cdot)\Big\} \times \Big\{f_4(\cdot)+ f_4(\cdot)\Big\} \times\Big\{f_4(\cdot)+ f_4(\cdot)\Big\}$
-\item Electrostatic (pair): $V_{elec} = V_{DH}(\cdot)$
+\item \textbf{Electrostatic} (pair): $V_{elec} = V_{DH}(\cdot)$
 \end{itemize}
 
 \vspace*{0.25cm}
@@ -341,9 +341,10 @@ V = &\sum_{nearest\ neighbours}(V_{backbone} + V'_{excv} + V_{stack}) \\
 \begin{itemize}
 \setlength\itemsep{5pt}
 \item The oxDNA model uses a \textbf{top-down coarse-graining approach} with rather complex \textbf{bespoke interactions}.
-\item The oxDNA potential uses \textbf{one bonded interaction} and \textbf{six pair interactions}. As strands denature, there is no residual memory of other conformations as is often the case with 3+ body interactions.
+\item The oxDNA potential comprises \textbf{one bonded interaction} and \textbf{six pair interactions}. As strands denature, there is no residual memory of other conformations as is often the case with 3+body interactions.
 \item The \textbf{thermodynamic properties} of oxDNA are basically those of the \textbf{SantaLucia nearest-neighbour model}, thought to be an \textbf{exact empirical fit} experiments. 
 \item \textbf{Uniquely among coarse-grained  models} at this level of detail, oxDNA is able to describe the \textbf{thermodynamics of duplex formation} and provide an \textbf{accurate average representation} of the structure and mechanics of \textbf{both single-stranded and double stranded DNA and its assemblies}.
+\item oxDNA2 features \textbf{sequence-specific hydrogen-bonding and stacking interaction strengths}. But there is \textbf{no intrinsic sequence-specific curvature or elasticity} ($\Rightarrow$ oxDNA3).  
 \end{itemize}
 \vspace*{0.25cm}
 \textbf{References}\\[3pt]
