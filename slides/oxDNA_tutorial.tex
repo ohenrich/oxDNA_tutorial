@@ -50,8 +50,8 @@
 \definecolor{myyellow}{rgb}{0.99,0.76, 0.0}
 \definecolor{mymagenta}{rgb}{1.0, 0.0, 1.0}
 
-\lstset{language=[LaTeX]{TeX},
-  basicstyle=\normalsize\ttfamily,
+\lstset{language=C,
+  basicstyle=\small\ttfamily,
   keywordstyle=\color{ckeyw}\bfseries,
   identifierstyle=\color{cident}\bfseries,
   commentstyle=\color{ccomm},
@@ -121,7 +121,7 @@
 \begin{center}
 \includegraphics[width=0.54\textwidth]{fromDNAtoChromatin.png}
 \includegraphics[width=0.45\textwidth]{A-B-Z-DNA.png}\\
-From DNA to chromatin \hspace{2.75cm} A-DNA, B-DNA, Z-DNA
+\textit{From DNA to chromatin} \hspace{2.75cm} \textit{A-DNA, B-DNA, Z-DNA}
 \end{center}
 
 \end{frame}
@@ -139,7 +139,8 @@ From DNA to chromatin \hspace{2.75cm} A-DNA, B-DNA, Z-DNA
 \end{itemize}
 \item \textbf{oxDNA: 13 DOF per nucleotide}\\
 3 positions, 3 translational momenta, 3 angular momenta, 1 unit quaternion (4 components)
-\item \textbf{Atomistic simulation} (e.g. thymine): around \textbf{200 DOF per nucleotide}\\
+\item \textbf{Atomistic simulation} (pyrimidine base plus sugar-phosphate group):\\
+around \textbf{200 DOF per nucleotide}\\
 34 atoms per nucleotide, each with 3 positions and 3 momenta
 \end{itemize}
 
@@ -157,9 +158,9 @@ From DNA to chromatin \hspace{2.75cm} A-DNA, B-DNA, Z-DNA
 \vspace*{0.5cm}
 \begin{itemize}
 \setlength\itemsep{7pt}
-\item[] (a) oxDNA nucleotide
-\item[] (b) Duplex
-\item[] (c) Interactions
+\item[] \textit{(a) oxDNA nucleotide}
+\item[] \textit{(b) Duplex}
+\item[] \textit{(c) Interactions}
 \end{itemize}
 \end{center}
 \end{column}
@@ -190,8 +191,8 @@ $\bm{r}_{base}=\bm{r}_{COM} + 0.4\, \bm{b}$
 \begin{center}
 \includegraphics[width=0.85\textwidth]{oxdna_oxdna2.png}\\
 \end{center}
-(a) oxDNA1 and oxDNA2 nucleotides: the base vector $\bm{b}$ is horizontally oriented from left to right, whereas the base normal $\bm{n}$ points away from the observer.\\[3pt]
-(b) The angled backbone interaction sites leads to the correct geometry with major and minor grooves. 
+\textit{(a) oxDNA1 and oxDNA2 nucleotides: the base vector $\bm{b}$ is horizontally oriented from left to right, whereas the base normal $\bm{n}$ points away from the observer.}\\[3pt]
+\textit{(b) The angled backbone interaction sites leads to the correct geometry with major and minor grooves.} 
 \end{column}
 \end{columns}
 
@@ -226,8 +227,10 @@ $\bm{r}_{base-back, ij}=\bm{r}_{base,i} - \bm{r}_{back,j}$
 \end{column}
 
 \begin{column}{0.44\textwidth}
+\vspace*{-0.25cm}
 \begin{center}
 \includegraphics[width=0.9\textwidth]{oxdna.jpg}
+\textit{oxDNA1 vectors and angles}
 \end{center}
 \end{column}
 \end{columns}
@@ -347,9 +350,8 @@ V = &\sum_{nearest\ neighbours}(V_{backbone} + V'_{excv} + V_{stack}) \\
 \item oxDNA2 features \textbf{sequence-specific hydrogen-bonding and stacking interaction strengths}. But there is \textbf{no intrinsic sequence-specific curvature or elasticity} ($\Rightarrow$ oxDNA3).  
 \end{itemize}
 \vspace*{0.25cm}
-\textbf{References}\\[3pt]
-[1] T. Ouldridge, A. Louis, and J. Doye, Structural, Mechanical, and Thermodynamic Properties of a Coarse-Grained DNA Model, \textit{J. Chem. Phys.} \textbf{134}, 085101 (2011).\\[3pt]
-[2] B. Snodin et al., Introducing Improved Structural Properties and Salt Dependence into a Coarse-Grained Model of DNA, \textit{J. Chem. Phys.}  \textbf{142}, 234901 (2015).
+[1] T. Ouldridge, A. Louis, and J. Doye, \href{https://doi.org/10.1063/1.3552946}{Structural, Mechanical, and Thermodynamic Properties of a Coarse-Grained DNA Model}, \textit{J. Chem. Phys.} \textbf{134}, 085101 (2011).\\[7pt]
+[2] B. Snodin, et al., \href{https://doi.org/10.1063/1.4921957}{Introducing Improved Structural Properties and Salt Dependence into a Coarse-Grained Model of DNA}, \textit{J. Chem. Phys.}  \textbf{142}, 234901 (2015).
 
 \end{frame}
 
@@ -357,42 +359,194 @@ V = &\sum_{nearest\ neighbours}(V_{backbone} + V'_{excv} + V_{stack}) \\
 \section{oxDNA Software}
 
 \begin{frame}
-\frametitle{LAMMPS version}
+\frametitle{LAMMPS Version}
+\begin{itemize}
+\item \textbf{L}arge-scale \textbf{A}tomic/\textbf{M}olecular \textbf{M}assively \textbf{P}arallel \textbf{S}imulator
+\item Available from the LAMMPS website at \href{https://www.lammps.org}{https://www.lammps.org}\\
+Distributed under GPL v2 by Sandia National Laboratories\\
+Latest stable release 23rd June 2022 (initial release 1995)
+\item Popular
+\begin{itemize}
+\item 405,000 downloads between September 2004 and June 2021
+\item 1,400 forks on GitHub, ca. 100 direct contributors
+\end{itemize}
+\item \textbf{Versatile}
+\begin{itemize}
+\item Very \textbf{advanced molecular dynamics capabilities}
+\item Code distributed over \textbf{91 standard and \texttt{USER} packages}
+\item Supported on \textbf{CPU-, multicore- and GPU-architectures}, but not all packages offer all options
+\item REPLICA: collection of multi-replica methods, e.g. parallel tempering
+\item PLUMED: free energy library, enhanced sampling
+\item COLVARS: collective variables library, advanced sampling methods like metadynamics, umbrella sampling, adaptive biasing force 
+\end{itemize}
+\item \textbf{Extendable}
+\begin{itemize}
+\item Object-oriented C++ class structure
+\item Top-level classes that are visible everywhere in the code
+\item Virtual parent classes derived from top-level classes
+\item Extensive use of polymorphism
+\end{itemize}
+\end{itemize}
 
 
 \end{frame}
-\section{oxDNA Software}
+
+\begin{frame}[fragile]
+\frametitle{LAMMPS Version}
+\small Building the LAMMPS version with standard make
+\begin{itemize}
+\item Requires C/C++ compiler that supports the C++11 standard
+\item Change to \texttt{/src} in your LAMMPS directory
+\item Load \texttt{ASPHERE}, \texttt{MOLECULE} and \texttt{\textcolor{red}{CG-DNA}} packages (minimal requirement)\\
+\linespread{0.4}
+\begin{lstlisting}
+make yes-asphere yes-molecule yes-cg-dna
+\end{lstlisting}
+\item Check modules are loaded and clean
+
+\begin{lstlisting}
+make ps
+
+Installed YES: package ASPHERE
+Installed YES: package CG-DNA
+Installed YES: package MOLECULE
+\end{lstlisting}
+
+\item Compile the serial and/or parallel version using the default \texttt{Makefiles} in \texttt{/src/MAKE}
+\begin{lstlisting}
+make [-j4] serial
+make [-j4] mpi
+\end{lstlisting}
+\item More \texttt{Makefile} configurations are in \texttt{/src/MAKE/MACHINES}
+\end{itemize}
+\linespread{1.0}\vspace*{0.25cm}
+[3] O. Henrich, Y. A. Guti\'errez Fosado, T. Curk, and T. E. Ouldridge, \href{https://doi.org/10.1140/epje/i2018-11669-8}{Coarse-Grained Simulation of DNA Using LAMMPS: An Implementation of the OxDNA Model and Its Applications}, \textit{Eur. Phys. J. E} \textbf{41}, (2018).\\[3pt]
+[4] LAMMPS CG-DNA Documentation \href{https://docs.lammps.org/PDF/CG-DNA.pdf}{https://docs.lammps.org/PDF/CG-DNA.pdf}
+\end{frame}
 
 \begin{frame}
-\frametitle{LAMMPS version}
+\frametitle{Standalone Version}
 
+\begin{itemize}
+\item \textbf{oxDNA} code includes oxDNA1, oxDNA2 and oxRNA 
+\item Available from \href{https://github.com/lorenzo-rovigatti/oxDNA}{https://github.com/lorenzo-rovigatti/oxDNA}\\
+Distributed under GPL v3\\
+Latest stable release 3.4.2 (8th Sept 2022)
+\item 11 forks on GitHub, half a dozen contributors
+\item Very \textbf{advanced Monte Carlo capabilities} like \textbf{Virtual-Move Monte Carlo} (VMMC) 
+\item Supported on \textbf{single-core CPU- and single GPU-architectures}
+\item Very extensive suite of \textbf{oxDNA Analysis Tools (OAT)} of bespoke postprocessing and analysis scripts 
+\end{itemize}
 
 \end{frame}
-\section{oxDNA Software}
+
+\begin{frame}[fragile]
+\frametitle{Standalone Version}
+Building the serial standalone version for CPU-architectures with standard CMake
+
+\begin{itemize}
+\item Requires
+
+\begin{itemize}
+\item C/C++ compiler that supports the C++14 standard
+\item CMake version $\ge 3.5$
+\item optionally CUDA toolkit version $\ge 10$
+\end{itemize}
+\item Change to the oxDNA top-level directory
+\linespread{0.4}
+\begin{lstlisting}
+cd oxDNA
+\end{lstlisting}
+\item Create a build directory and change to it
+\begin{lstlisting}
+mkdir build
+cd build
+\end{lstlisting}
+\item Create Makefiles, specify additonal options
+\begin{lstlisting}
+cmake ..
+\end{lstlisting}
+\item Compile the serial version
+\begin{lstlisting}
+make [-j4]
+\end{lstlisting}
+\end{itemize}
+
+[5] oxDNA Documentation \href{https://lorenzo-rovigatti.github.io/oxDNA}{https://lorenzo-rovigatti.github.io/oxDNA}\\[3pt]
+[6] oxDNA Website \href{https://dna.physics.ox.ac.uk}{https://dna.physics.ox.ac.uk}
+
+\end{frame}
 
 \begin{frame}
-\frametitle{LAMMPS version}
+\frametitle{tacoxDNA Tools and Converters}
 
+Available
+\begin{itemize}
+\item as webserver at \href{http://tacoxdna.sissa.it}{http://tacoxdna.sissa.it}
+\item as standalone Python code from \href{https://github.com/lorenzo-rovigatti/tacoxDNA}{https://github.com/lorenzo-rovigatti/tacoxDNA}
+\end{itemize}
+
+\vspace*{0.5cm}
+\includegraphics[width=0.45\textwidth]{tacoxDNA_pdb.jpg}
+\includegraphics[width=0.45\textwidth]{tacoxDNA_trefoil.jpg}\\
+\vspace*{0.5cm}
+
+[7] A. Suma, et al., \href{https://doi.org/10.1002/jcc.26029}{TacoxDNA: A User-Friendly Web Server for Simulations of Complex DNA Structures, from Single Strands to Origami}, \textit{J. Comput. Chem.} \textbf{40}, 2586 (2019).
+
+\end{frame}
+\begin{frame}
+
+\frametitle{tacoxDNA Tools and Converters}
+
+\begin{columns}
+\begin{column}{0.55\textwidth}
+\vspace*{0.25cm}\\
+A variety of format conversions is supported. The native oxDNA format can also be used as intermediate.
+\vspace*{0.25cm}
+\begin{itemize}
+\setlength\itemsep{7pt}
+\item LAMMPS format $\Leftrightarrow$ native oxDNA format
+\item PDB format $\Leftrightarrow$ native oxDNA format
+\item XYZ format $\Rightarrow$ native oxDNA format
+\item cadnano $\Rightarrow$ native oxDNA format
+\item CanDo $\Rightarrow$ native oxDNA format
+\item Tiamat $\Rightarrow$ native oxDNA format
+\end{itemize}
+\end{column}
+
+\begin{column}{0.45\textwidth}
+\begin{center}
+\includegraphics[width=0.90\textwidth]{tacoxDNA_schematic.jpg}
+\end{center}
+\end{column}
+\end{columns}
+\vspace*{0.25cm}
+[7] A. Suma, et al., \href{https://doi.org/10.1002/jcc.26029}{TacoxDNA: A User-Friendly Web Server for Simulations of Complex DNA Structures, from Single Strands to Origami}, \textit{J. Comput. Chem.} \textbf{40}, 2586 (2019).
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Standalone version}
+\frametitle{oxViewer Visualisation and Manipulation Toolkit}
+\small
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\vspace*{-0.25cm}
+\includegraphics[width=\textwidth]{oxviewer.png}
+\end{center}
+\end{column}
+\end{columns}
+
+[8] E. Poppleton, et al., \href{https://doi.org/10.1093/nar/gkaa417}{Design, Optimization and Analysis of Large DNA and RNA Nanostructures through Interactive Visualization, Editing and Molecular Simulation}, \textit{Nucleic Acids Res.} \textbf{48}, e72 (2020).\\[3pt]
+
+[9] J. Bohlin, et al., \href{https://doi.org/10.1038/s41596-022-00688-5}{Design and Simulation of DNA, RNA and Hybrid Protein–Nucleic Acid Nanostructures with OxView}, \textit{Nat. Protoc.} \textbf{17}, 1762 (2022).
 
 
 \end{frame}
-\begin{frame}
-\frametitle{Standalone version}
 
-
-\end{frame}
-\begin{frame}
-\frametitle{Standalone version}
-
-
-\end{frame}
-
-\section{Practical}
+\section{Practical Exercises}
 
 \begin{frame}
 \frametitle{Melting}
