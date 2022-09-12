@@ -359,6 +359,25 @@ V = &\sum_{nearest\ neighbours}(V_{backbone} + V'_{excv} + V_{stack}) \\
 \section{oxDNA Software}
 
 \begin{frame}
+\frametitle{Overview}
+
+We will use the following software\\[10pt]
+
+\begin{itemize}
+\setlength\itemsep{10pt}
+\item LAMMPS version of oxDNA\\
+The implementation of oxDNA1, oxDNA2 and oxRNA2 in the LAMMPS code via the \texttt{CG-DNA USER} package 
+\item Standalone version of oxDNA\\
+The original re-implementation of oxDNA1, which was extended to oxDNA2 and oxRNA2
+\item tacoxDNA\\
+A suite of tools and converters
+\item oxView\\
+A visualisation and data manipulation toolkit
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
 \frametitle{LAMMPS Version}
 \begin{itemize}
 \item \textbf{L}arge-scale \textbf{A}tomic/\textbf{M}olecular \textbf{M}assively \textbf{P}arallel \textbf{S}imulator
@@ -525,19 +544,40 @@ A variety of format conversions is supported. The native oxDNA format can also b
 
 \end{frame}
 
-\begin{frame}
-\frametitle{oxViewer Visualisation and Manipulation Toolkit}
+\begin{frame}[fragile]
+\frametitle{oxView Visualisation and Manipulation Toolkit}
 \small
+
 \begin{columns}
-\begin{column}{0.5\textwidth}
+
+\begin{column}{0.6\textwidth}
+\textbf{oxView} is a webbrowser-based visualiser
+\begin{itemize}
+\item Can load structures with over 1 million nucleotides
+\item Create videos from simulation trajectories
+\item Allow users to perform basic edits to DNA and RNA designs
+\end{itemize}
+\vspace*{0.25cm}
+Available from \href{https://github.com/sulcgroup/oxdna-viewer}{https://github.com/sulcgroup/oxdna-viewer}
+\begin{itemize}
+\item Navigate down to the \texttt{README.md} and click \href{https://sulcgroup.github.io/oxdna-viewer}{Try it!}\\or
+\item Load \href{https://sulcgroup.github.io/oxdna-viewer}{https://sulcgroup.github.io/oxdna-viewer}\\or
+\item Run locally on \texttt{localhost:8000} by starting a python server in your oxView directory
+\begin{lstlisting}
+python -m http.server 8000
+\end{lstlisting}
+\end{itemize}
+
 \end{column}
-\begin{column}{0.5\textwidth}
+\begin{column}{0.4\textwidth}
 \begin{center}
 \vspace*{-0.25cm}
 \includegraphics[width=\textwidth]{oxviewer.png}
 \end{center}
 \end{column}
 \end{columns}
+
+\vspace*{0.25cm}
 
 [8] E. Poppleton, et al., \href{https://doi.org/10.1093/nar/gkaa417}{Design, Optimization and Analysis of Large DNA and RNA Nanostructures through Interactive Visualization, Editing and Molecular Simulation}, \textit{Nucleic Acids Res.} \textbf{48}, e72 (2020).\\[3pt]
 
