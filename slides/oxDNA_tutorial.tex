@@ -50,7 +50,7 @@
 \definecolor{myyellow}{rgb}{0.99,0.76, 0.0}
 \definecolor{mymagenta}{rgb}{1.0, 0.0, 1.0}
 
-\lstset{language=C,
+\lstset{language=Python,
   basicstyle=\small\ttfamily,
   keywordstyle=\color{ckeyw}\bfseries,
   identifierstyle=\color{cident}\bfseries,
@@ -412,7 +412,8 @@ Latest stable release 23rd June 2022 (initial release 1995)
 
 \begin{frame}[fragile]
 \frametitle{LAMMPS Version}
-\small Building the LAMMPS version with standard make
+\small 
+Building the LAMMPS version with standard make
 \begin{itemize}
 \item Requires C/C++ compiler that supports the C++11 standard
 \item Change to \texttt{/src} in your LAMMPS directory
@@ -447,6 +448,7 @@ make [-j4] mpi
 \frametitle{Standalone Version}
 
 \begin{itemize}
+\setlength\itemsep{10pt}
 \item \textbf{oxDNA} code includes oxDNA1, oxDNA2 and oxRNA 
 \item Available from \href{https://github.com/lorenzo-rovigatti/oxDNA}{https://github.com/lorenzo-rovigatti/oxDNA}\\
 Distributed under GPL v3\\
@@ -587,10 +589,90 @@ python -m http.server 8000
 \end{frame}
 
 \section{Practical Exercises}
+\small
 
-\begin{frame}
-\frametitle{Melting}
-BlaBlaBlaBlub
+\begin{frame}[fragile]
+\frametitle{(I) Creating an Initial Configuration}
+
+\begin{itemize}
+\item Clone the oxDNA tutorial directory from GitHub
+\begin{lstlisting}
+git clone https://github.com/ohenrich/oxDNA_tutorial.git 
+\end{lstlisting}
+
+\item Navigate to the first exercise
+\begin{lstlisting}
+cd exercises/1_initial_config
+\end{lstlisting}
+
+\item Inspect the file \texttt{sequence.txt}
+\begin{lstlisting}
+vi sequence.txt
+DOUBLE AAAAAACGCGAAA...
+\end{lstlisting}
+The keyword \texttt{DOUBLE} indicates that we will create double-stranded DNA. Omitting the keyword produces a single-stranded configuration.
+
+\item Check syntax of configuration generator
+\linespread{0.4}
+\begin{lstlisting}
+python generate-sa.py
+
+Usage: generate-sa.py <box size> <file with sequences>
+\end{lstlisting}
+
+\item Generate an initial configuration in a box size 100
+\begin{lstlisting}
+python generate-sa.py 100 sequence.txt
+
+Found duplex of 63 bases
+nstrands, nnucl =  2 126
+Adding duplex of 63 bases
+done line 1 / 1, now at 126/126
+ALL DONE. just generated 'generated.dat' and 'generated.top'
+\end{lstlisting}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{(I) Creating an Initial Configuration}
+
+\begin{itemize}
+\item Inspect the oxDNA standalone format: topology file
+\linespread{0.4}
+\begin{lstlisting}
+vi generated.top
+
+126 2             # total no. of nucleotides and strands
+1 A -1 1          # strand ID, nucleotide type, 3' partner, 5' partner
+1 A 0 2
+1 A 1 3
+1 A 2 4
+...
+\end{lstlisting}
+
+
+\item Inspect the oxDNA standalone format: configuration file
+\begin{lstlisting}
+vi generated.dat
+
+t = 0                           # timestep
+b = 100.0 100.0 100.0           # box dimensions
+E = 0. 0. 0.                    # energy 
+81.10076700045578 45.544279111797685 26.695973276367443 0.6836324286755338 0.6187606869041726 -0.3870166854349663 0.4842717557006389 0.012139188631672909 0.8748334165599674 0.0 0.0 0.0 0.0 0.0 0.0
+81.55953447082155 45.3431814998625 26.89033700942101 0.233605215000666 0.9618090481628894 -0.1426602901878769 0.4842717557006389 0.012139188631672909 0.8748334165599674 0.0 0.0 0.0 0.0 0.0 0.0
+...
+
+# position, base vector, base normal, velocity, angular momentum
+\end{lstlisting}
+
+\item Rename the files
+\begin{lstlisting}
+mv generated.top dsDNA_init.top
+mv generated.dat dsDNA_init.dat
+\end{lstlisting}
+
+\end{itemize}
 
 \end{frame}
 
