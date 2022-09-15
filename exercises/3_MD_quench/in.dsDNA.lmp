@@ -48,7 +48,7 @@ pair_coeff * * oxdna2/dh      ${T} ${rhos} 0.815
 
 # NVE ensemble
 fix 1 all nve/asphere
-fix 2 all langevin ${T} ${T} 25.0 85128231 angmom 10
+fix 2 all langevin ${T} ${T} 25.0 85377941 angmom 10
 
 timestep 1e-2
 
@@ -87,7 +87,7 @@ variable edh equal c_edh
 fix 6 all print ${efreq} "$(step)  ekin = ${ekin} |  erot = ${erot} | ebond = ${ebond} | eexcv = ${eexcv} | estk = ${estk} | ehbond = ${ehbond} | exstk = ${exstk} | ecoaxstk = ${ecoaxstk} | edh = ${edh} | epot = ${epot} | etot = ${etot}" screen yes
 
 dump out all custom ${ofreq} out.lammpstrj id mol type x y z ix iy iz vx vy vz c_quat[1] c_quat[2] c_quat[3] c_quat[4] angmomx angmomy angmomz
-dump_modify out sort id append yes
+dump_modify out sort id
 dump_modify out format line "%d %d %d  %22.15le %22.15le %22.15le  %d %d %d  %22.15le %22.15le %22.15le  %22.15le %22.15le %22.15le %22.15le  %22.15le %22.15le %22.15le"
 
 #restart 100000 restart.0 restart.1
@@ -95,5 +95,5 @@ dump_modify out format line "%d %d %d  %22.15le %22.15le %22.15le  %d %d %d  %22
 reset_timestep ${nstart}
 run ${nstep}
 
-write_data data.dsDNA.${number} nocoeff
+write_data data.dsDNA.${number}.lmp nocoeff
 #write_restart restart.*
