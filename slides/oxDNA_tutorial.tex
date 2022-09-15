@@ -589,30 +589,30 @@ python -m http.server 8000
 \end{frame}
 
 \section{Practical Exercises}
-\small
 
 \begin{frame}[fragile]
 \frametitle{(I) Creating an Initial Configuration}
+\small
 
 \begin{itemize}
-\item Clone the oxDNA tutorial directory from GitHub
+\item Clone the oxDNA tutorial directory from GitHub.
 \begin{lstlisting}
 git clone https://github.com/ohenrich/oxDNA_tutorial.git 
 \end{lstlisting}
 
-\item Navigate to the first exercise
+\item Navigate to the first exercise.
 \begin{lstlisting}
 cd exercises/1_initial_config
 \end{lstlisting}
 
-\item Inspect the file \texttt{sequence.txt}
+\item Inspect the file \texttt{sequence.txt}.
 \begin{lstlisting}
 vi sequence.txt
 DOUBLE AAAAAACGCGAAA...
 \end{lstlisting}
 The keyword \texttt{DOUBLE} indicates that we will create double-stranded DNA. Omitting the keyword produces a single-stranded configuration.
 
-\item Check syntax of configuration generator
+\item Check syntax of configuration generator.
 \linespread{0.4}
 \begin{lstlisting}
 python generate-sa.py
@@ -620,7 +620,7 @@ python generate-sa.py
 Usage: generate-sa.py <box size> <file with sequences>
 \end{lstlisting}
 
-\item Generate an initial configuration in a box size 100
+\item Generate an initial configuration in a box size 100.
 \begin{lstlisting}
 python generate-sa.py 100 sequence.txt
 
@@ -636,6 +636,7 @@ ALL DONE. just generated 'generated.dat' and 'generated.top'
 
 \begin{frame}[fragile]
 \frametitle{(I) Creating an Initial Configuration}
+\small
 
 \begin{itemize}
 \item Inspect the oxDNA standalone format: topology file
@@ -678,12 +679,12 @@ mv generated.dat dsDNA_init.dat
 
 \begin{frame}[fragile]
 \frametitle{(I) Creating an Initial Configuration}
-\normalsize
+
 \begin{itemize}
-\item Download the topology and configuration files to your local host in a working directory
+\item Download the topology and configuration files to your local host in a working directory.
 \begin{lstlisting}
-scp username@hostname:/path/to/oxDNA_tutorial/
-                                exercises/1_initial_config/dsDNA_init* .
+scp username@hostname:/path/to/oxDNA_tutorial/exercises/ \
+      1_initial_config/dsDNA_init* /your/working/directory/
 \end{lstlisting}
 \end{itemize}
 
@@ -695,9 +696,9 @@ scp username@hostname:/path/to/oxDNA_tutorial/
 \setlength\itemsep{15pt}
 \item Open oxView in your browser,\\
 click on the 'Open' tab,\\
-navigate to your local working directory and load the two files
+navigate to your local working directory where you saved the two files and load them.
 
-\item Inspect and edit the visualisation, e.g. by rotating and translating the dsDNA molecule
+\item Inspect and edit the visualisation, e.g. by rotating and translating the dsDNA molecule.
 \end{itemize}
 \end{column}
 
@@ -712,12 +713,32 @@ navigate to your local working directory and load the two files
 
 \begin{frame}[fragile]
 \frametitle{(II) Equilibration Using The Standalone Code}
+\small
+In this exercise we want to equilibrate the initial configuration using the Virtual-Move Monte Carlo (VMMC) algorithm provided in the standalone code.\\[7pt]
 
 \begin{itemize}
-\item 
+\item Copy the topology and configuration file into the directory for the second exercise and navigate to this directory.
 \begin{lstlisting}
-
+cp /exercises/1_initial_config/dsDNA_init.* \ 
+    /exercises/2_MC_equilibration
+cd /exercises/2_MC_equilibration
 \end{lstlisting}
+\item Perform a VMMC run with the oxDNA standalone code on a single CPU using the \texttt{input} input file.
+\linespread{0.4}
+\begin{lstlisting}
+./oxDNA input 
+
+     0  -1.679223   0.000  0.000  0.000   
+   100  -1.608630   0.751  0.197  0.000   
+   200  -1.608018   0.746  0.199  0.000   
+   300  -1.587952   0.743  0.200  0.000   
+
+   ...      ...        ...     ...     ...  
+\end{lstlisting}
+The columns correspond to MC step, potential energy per nucleotide, acceptance ratio for translational moves, acceptance ratio for rotational moves, acceptance ratio for volume moves.
+
+\item The sequence of configurations of the VMMC run is contained in \texttt{dsDNA\_equ.dat}. The last configuration is contained in \texttt{last\_config.dat}.
+
 \end{itemize}
 
 \end{frame}
@@ -726,46 +747,115 @@ navigate to your local working directory and load the two files
 \frametitle{(II) Equilibration Using The Standalone Code}
 
 \begin{itemize}
-\item 
+\item Download the \texttt{dsDNA\_equ.dat} configuration file to your local host in a working directory.
 \begin{lstlisting}
-
+scp username@hostname:/path/to/oxDNA_tutorial/exercises/ \
+      2_MC_equilibration/dsDNA_equ.dat ./your/working/directory
 \end{lstlisting}
+\end{itemize}
+
+\begin{columns}
+
+\begin{column}{0.48\textwidth}
+
+\begin{itemize}
+\setlength\itemsep{15pt}
+\item In your oxView tab in your browser,\\
+click on the 'Open' tab,\\
+navigate to your working directory,
+\\load the new configuration file and the previous topology file\\
+(the topology has not changed).
+
+\item Inspect the output of the VMMC equilibrated dsDNA molecule.
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+
+\includegraphics[width=\textwidth]{oxView_dsDNA_equ.png}
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{(III) Temperature Quench Using LAMMPS}
+\small
+
+The dsDNA molecule has been equilibrated at $T=20^\circ C$. We want to perform a quench to $T=100^\circ C$ with LAMMPS and observe how the dsDNA molecule denatures into two ssDNA molecules.\\[10pt]
+In order to do this, we need to convert the equilibrated configuration \texttt{dsDNA\_equ.dat} from oxDNA standalone to LAMMPS format.\\[10pt]
+
+\begin{itemize}
+\setlength\itemsep{5pt}
+\item In your oxView visualisation from exercise (II), check if the dsDNA molecule is centred around the origin. Otherwise navigate to the 'View' tab, select 'Centering $\rightarrow$ Origin' and click 'Apply'.
+\item Navigate to the 'File' tab and select 'Downloading the current scene as oxDNA files' from the 'Save' tab. 
+\item Export the current topology and configuration file as \texttt{output.top} and \texttt{output.dat} to your Download directory.
+\item Navigate to the taxoxDNA webserver at \href{http://tacoxdna.sissa.it}{http://tacoxdna.sissa.it} and select the 'oxDNA $\rightarrow$ LAMMPS' tool.
+\item Select \texttt{output.top} and \texttt{output.dat} as oxDNA topology and configuration file and click 'Generate'.
+\item Click 'Download output'. A new tab opens in your browser. Save the page as \texttt{txt} file.  
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{}
+\frametitle{(III) Temperature Quench Using LAMMPS}
+
+\small
 
 \begin{itemize}
-\item 
-\begin{lstlisting}
+\item Rename the LAMMPS data file to \texttt{data.dsDNA\_equ.lmp} and copy it into the directory for the third exercise on your remote host.
 
+\begin{lstlisting}
+scp ./data.dsDNA_equ username@hostname:/exercises/3_MD_quench
 \end{lstlisting}
+
+\item On the remote host open \texttt{data.dsDNA\_equ.lmp} in a text editor.\\
+Set the number of bond types to \textbf{\texttt{2 bond types}} and the box boundaries to\\
+\textbf{\texttt{-50.0 50.0 xlo xhi}} \textbf{\texttt{-50.0 50.0 ylo yhi}}
+\textbf{\texttt{-50.0 50.0 zlo zhi}}.\\
+The top of your LAMMPS data file should look like this:
+\linespread{0.4}
+\begin{lstlisting}
+# LAMMPS data file
+126 atoms
+126 ellipsoids
+124 bonds
+
+4 atom types
+2 bond types
+
+# System size
+-50.000000 50.000000 xlo xhi
+-50.000000 50.000000 ylo yhi
+-50.000000 50.000000 zlo zhi
+
+    ...          ...         ... 
+\end{lstlisting}
+The first edit is necessary so we can monitor the potential energy in the FENE backbone interaction. The second edit resets the boundaries with the dsDNA molecule centred in the simulation box.
+
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{}
+\frametitle{(III) Temperature Quench Using LAMMPS}
 
 \begin{itemize}
-\item 
+\item Perform an MD run with LAMMPS on 8 CPUs using the \texttt{in.dsDNA.lmp} input file.
 \begin{lstlisting}
-
+mpirun -np 8 ./lmp_mpi < in.dsDNA.lmp 
+LAMMPS (23 Jun 2022 - Update 1)
+WARNING: Atom style hybrid defines both, per-type and per-atom masses; both must be set, but only per-atom masses will be used (../atom_vec_hybrid.cpp:133)
+Reading data file ...
+  orthogonal box = (-50 -50 -50) to (50 50 50)
+...
 \end{lstlisting}
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{}
-
-\begin{itemize}
-\item 
+\item \textbf{Note}: \textbf{On this occasion} do not worry about the warning
 \begin{lstlisting}
-
+WARNING: Proc sub-domain size < neighbor skin, could lead to lost atoms
 \end{lstlisting}
+To optimise runtimes we run here on 8 CPU cores, which leads on average to only around 16 nucleotides per process. At this system size (126 nucleotides), we would normally run only on 2 or 4 MPI-tasks.
 \end{itemize}
 
 \end{frame}

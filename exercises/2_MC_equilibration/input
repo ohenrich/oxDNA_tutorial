@@ -20,14 +20,14 @@ verlet_skin = 1.0
 ####    INPUT / OUTPUT    ####
 topology = dsDNA_init.top
 conf_file = dsDNA_init.dat 
-trajectory_file = trajectory.dat
+trajectory_file = dsDNA_equ.dat
 refresh_vel = 1
 preserve_topology = 1
 log_file = log.dat
 no_stdout_energy = 0
 restart_step_counter = 1
 energy_file = energy.dat
-print_conf_interval = 100
-print_energy_every = 10
+print_conf_interval = 1000
+print_energy_every = 100
 external_forces = 0
 time_scale = linear
