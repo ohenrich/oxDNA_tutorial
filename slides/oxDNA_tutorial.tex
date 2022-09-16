@@ -860,4 +860,35 @@ To optimise runtimes we run here on 8 CPU cores, which leads on average to only 
 
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{(III) Temperature Quench Using LAMMPS}
+
+Visualising the trajectory with oxView requires transformation from the LAMMPS into the oxDNA format with tacoxDNA.\\[5pt]
+As the webserver supports currently only the transformation of data files, tacoxDNA has to be used on the command line.
+
+\begin{itemize}
+
+\item On the remote host clone the tacoxDNA repository from the GitHub website.
+\begin{lstlisting}
+git clone https://github.com/lorenzo-rovigatti/tacoxDNA
+\end{lstlisting}
+\item Navigate to your working directory with the LAMMPS trajectory.
+\begin{lstlisting}
+cd /exercises/3_MD_quench
+\end{lstlisting}
+\item Transform the LAMMPS trajectory into oxDNA format using the command line. 
+\begin{lstlisting}
+python /path/to/taxoxDNA/src/oxDNA_LAMMPS.py/src/LAMMPS_oxDNA.py \
+         data.dsDNA.1.lmp out.lammpstrj
+
+Wrote data to 'data.dsDNA.1.lmp.oxdna' / 'data.dsDNA.1.lmp.top'
+DONE
+\end{lstlisting}
+\item Download the topology and configuration file to your local host and visualise the trajectory with oxView.
+
+\end{itemize}
+
+
+\end{frame}
+
 \end{document}
