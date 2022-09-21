@@ -498,6 +498,36 @@ make [-j4]
 
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Standalone Version}
+
+Build with oxDNA Analysis Tools (OAT)\\[7pt]
+
+\begin{itemize}
+\item Create Makefiles with specific options
+\begin{lstlisting}
+cmake .. -DPython=ON -DOxpySystemInstall=On
+\end{lstlisting}
+\item It might be necessary to specify explicit paths.
+\begin{lstlisting}
+cmake .. -DPython=ON -DOxpySystemInstall=On 
+            -DPYTHON_INCLUDE_DIRS=/path/to/python/include/dir
+            -DPYTHON_EXECUTABLE=/path/to/python/binary
+\end{lstlisting}
+\item Compile and install
+\begin{lstlisting}
+make [-j4]
+make install
+\end{lstlisting}
+\end{itemize}
+
+\textbf{Note}: A full installation of Anaconda3 is highly recommended!\\[7pt]
+
+More information regarding installation and known issues is available in the\\[3pt] 
+[5] oxDNA documentation \href{https://lorenzo-rovigatti.github.io/oxDNA/install.html}{https://lorenzo-rovigatti.github.io/oxDNA/install.html}
+
+\end{frame}
+
 \begin{frame}
 \frametitle{tacoxDNA Tools and Converters}
 
@@ -889,6 +919,93 @@ DONE
 \end{itemize}
 
 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{(IV) oxDNA Analysis Tools}
+
+Calculate the mean structure of a trajectory file
+\begin{lstlisting}
+oat mean -h
+
+usage: mean.py [-h] [-p num_cpus] [-o output_file] [-d deviation_file] [-i index_file] [-a alignment_configuration]
+               trajectory
+
+Computes the mean structure of a trajectory file
+
+positional arguments:
+  trajectory            The trajectory file you wish to analyze
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p num_cpus           (optional) How many cores to use
+  -o output_file, --output output_file
+                        The filename to save the mean structure to
+  -d deviation_file, --deviations deviation_file
+                        Immediatley run oat deviations from the output
+  -i index_file         Compute mean structure of a subset of particles from a space-separated list in the provided file
+  -a alignment_configuration, --align alignment_configuration
+\end{lstlisting}
+
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{(IV) oxDNA Analysis Tools}
+
+Calculate the mean structure of VMMC equilibration in \texttt{/exercises/2\_MC\_equilibration}
+
+\begin{lstlisting}
+oat mean -p 4 -o dsDNA_equ_mean.png dsDNA_equ.dat 
+\end{lstlisting}
+\includegraphics[width=\textwidth]{oxView_dsDNA_mean_config.png}
+
+Requires dsDNA configuration as input for meaningful orientational averaging 
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{(IV) oxDNA Analysis Tools}
+
+Calculate the ensemble of distances between nucleotides
+
+\begin{lstlisting} 
+oat distance -h
+
+usage: distance.py [-h] [-i input [input ...]] [-o output_file] [-f <histogram/trajectory/both>] [-p num_cpus]
+
+Finds the ensemble of distances between any two particles in the system
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i input [input ...], --input input [input ...]
+                        A trajectory, and a list of particle pairs to compare. Can call -i multiple times to plot
+                        multiple datasets.
+  -o output_file, --output output_file
+                        The name to save the graph file to
+  -f <histogram/trajectory/both>, --format <histogram/trajectory/both>
+                        Output format for the graphs. Defaults to histogram. Options are "histogram", "trajectory", and
+                        "both"
+  -p num_cpus, --parallel num_cpus
+                        (optional) How many cores to use
+\end{lstlisting}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{(IV) oxDNA Analysis Tools}
+
+Calculate the ensemble of distances between the first and second and the second and third nucleotide
+
+\begin{lstlisting}
+oat distance -p 4 -f both -i data.dsDNA.1.lmp.oxdna 0 1 1 2 -o distance_dsDNA.1.png
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=0.49\textwidth]{distance_dsDNA_traj.1.png}
+\includegraphics[width=0.49\textwidth]{distance_dsDNA_hist.1.png}\\
+\textit{Trajectory of distances}
+\hspace*{3cm}
+\textit{Histogram of distances}
+\end{center}
 \end{frame}
 
 \end{document}
