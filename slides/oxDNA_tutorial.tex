@@ -820,7 +820,7 @@ navigate to your working directory,
 \small
 
 The dsDNA molecule has been equilibrated at $T=20^\circ C$. We want to perform a quench to $T=100^\circ C$ with LAMMPS and observe how the dsDNA molecule denatures into two ssDNA molecules.\\[10pt]
-In order to do this, we need to convert the equilibrated configuration \texttt{dsDNA\_equ.dat} from oxDNA standalone to LAMMPS format.\\[10pt]
+In order to do this, we need to convert the last equilibrated configuration \texttt{last\_config.dat} from oxDNA standalone to LAMMPS format.\\[10pt]
 
 \begin{itemize}
 \setlength\itemsep{5pt}
@@ -843,7 +843,7 @@ In order to do this, we need to convert the equilibrated configuration \texttt{d
 \item Rename the LAMMPS data file to \texttt{data.dsDNA\_equ.lmp} and copy it into the directory for the third exercise on your remote host.
 
 \begin{lstlisting}
-scp ./data.dsDNA_equ username@hostname:/exercises/3_MD_quench
+scp ./data.dsDNA_equ.lmp username@hostname:/exercises/3_MD_quench
 \end{lstlisting}
 
 \item On the remote host open \texttt{data.dsDNA\_equ.lmp} in a text editor.\\
