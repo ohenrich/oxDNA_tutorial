@@ -70,10 +70,10 @@
   }
 
 \title[The oxDNA Coarse-Grained Model of DNA and RNA]{\textbf{The oxDNA Coarse-Grained Model of DNA}}
-\subtitle{An Introduction to the Model and Software Framework }
+\subtitle{An Introduction to the Model and Software Framework}
 \author[Oliver Henrich]{Oliver Henrich \\ \small Email: \href{mailto:oliver.henrich@strath.ac.uk}{oliver.henrich@strath.ac.uk}}
 \institute[U Strathclyde, Glasgow, UK]{Department of Physics, University of Strathclyde, Glasgow, UK}
-\date{22nd September 2022}
+\date{29th April 2024}
 
 
 \begin{document}
@@ -127,7 +127,7 @@ GitHub tutorial repo at \href{https://github.com/ohenrich/oxDNA\_tutorial}{https
 \begin{center}
 \includegraphics[width=0.54\textwidth]{fromDNAtoChromatin.png}
 \includegraphics[width=0.45\textwidth]{A-B-Z-DNA.png}\\
-\textit{From DNA to chromatin} \hspace{2.75cm} \textit{A-DNA, B-DNA, Z-DNA}
+\textit{From DNA to chromatin}\hspace{3.2cm}\textit{A-DNA}\hspace{0.9cm} \textit{B-DNA}\hspace{0.9cm}\textit{Z-DNA}
 \end{center}
 
 \end{frame}
@@ -355,10 +355,10 @@ V = &\sum_{nearest\ neighbours}(V_{backbone} + V'_{excv} + V_{stack}) \\
 \item \textbf{Uniquely among coarse-grained  models} at this level of detail, oxDNA is able to describe the \textbf{thermodynamics of duplex formation} and provide an \textbf{accurate average representation} of the structure and mechanics of \textbf{both single-stranded and double stranded DNA and its assemblies}.
 \item oxDNA2 features \textbf{sequence-specific hydrogen-bonding and stacking interaction strengths}. But there is \textbf{no intrinsic sequence-specific curvature or elasticity} ($\Rightarrow$ oxDNA3).  
 \end{itemize}
-\vspace*{0.25cm}
-[1] T. Ouldridge, A. Louis, and J. Doye, \href{https://doi.org/10.1063/1.3552946}{Structural, Mechanical, and Thermodynamic Properties of a Coarse-Grained DNA Model}, \textit{J. Chem. Phys.} \textbf{134}, 085101 (2011).\\[7pt]
-[2] B. Snodin, et al., \href{https://doi.org/10.1063/1.4921957}{Introducing Improved Structural Properties and Salt Dependence into a Coarse-Grained Model of DNA}, \textit{J. Chem. Phys.}  \textbf{142}, 234901 (2015).
-
+\vspace*{0.2cm}
+[1] T. Ouldridge, A. Louis, and J. Doye, \href{https://doi.org/10.1063/1.3552946}{Structural, Mechanical, and Thermodynamic Properties of a Coarse-Grained DNA Model}, \textit{J. Chem. Phys.} \textbf{134}, 085101 (2011).\\[3pt]
+[2] B. Snodin, et al., \href{https://doi.org/10.1063/1.4921957}{Introducing Improved Structural Properties and Salt Dependence into a Coarse-Grained Model of DNA}, \textit{J. Chem. Phys.}  \textbf{142}, 234901 (2015).\\[3pt]
+[3] A. Sengar, et al., \href{https://doi.org/10.3389/fmolb.2021.693710}{A primer on the oxDNA model of DNA: When to use it, how to simulate it and how to interpret the results}, \textit{Front. Mol. Biosci.}  \textbf{8}, 693710 (2021).
 \end{frame}
 
 
@@ -372,7 +372,7 @@ We will use the following software\\[10pt]
 \begin{itemize}
 \setlength\itemsep{10pt}
 \item LAMMPS version of oxDNA\\
-The implementation of oxDNA1, oxDNA2 and oxRNA2 in the LAMMPS code via the \texttt{CG-DNA USER} package 
+The implementation of oxDNA1, oxDNA2 and oxRNA2 in the LAMMPS code via the \texttt{CG-DNA} package 
 \item Standalone version of oxDNA\\
 The original re-implementation of oxDNA1, which was extended to oxDNA2 and oxRNA2
 \item tacoxDNA\\
