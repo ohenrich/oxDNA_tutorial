@@ -22,6 +22,7 @@ atom_modify sort 0 1.0
 neighbor 2.0 bin
 neigh_modify every 10 delay 0 check yes
 
+
 read_data data.dsDNA_equ.lmp
 
 set atom * mass 3.1575
@@ -56,6 +57,7 @@ comm_style tiled
 fix 3 all balance 1000 1.03 rcb
 #fix 3 all balance 1000 1.03 shift xyz 10 1.03
 #comm_modify cutoff 5.8
+pair_modify neigh/trim no
 
 compute quat all property/atom quatw quati quatj quatk
 

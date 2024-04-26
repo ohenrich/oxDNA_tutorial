@@ -588,15 +588,15 @@ A variety of format conversions is supported. The native oxDNA format can also b
 
 \begin{columns}
 
-\begin{column}{0.6\textwidth}
+\begin{column}{0.65\textwidth}
 \textbf{oxView} is a webbrowser-based visualiser
 \begin{itemize}
 \item Can load structures with over 1 million nucleotides
 \item Create videos from simulation trajectories
 \item Allow users to perform basic edits to DNA and RNA designs
 \end{itemize}
-\vspace*{0.25cm}
-Available from \href{https://github.com/sulcgroup/oxdna-viewer}{https://github.com/sulcgroup/oxdna-viewer}
+\vspace*{0.1cm}
+Available from \href{https://github.com/sulcgroup/oxdna-viewer}{https://github.com/sulcgroup/oxdna-viewer}  
 \begin{itemize}
 \item Navigate down to the \texttt{README.md} and click \href{https://sulcgroup.github.io/oxdna-viewer}{Try it!}\\or
 \item Load \href{https://sulcgroup.github.io/oxdna-viewer}{https://sulcgroup.github.io/oxdna-viewer}\\or
@@ -604,12 +604,13 @@ Available from \href{https://github.com/sulcgroup/oxdna-viewer}{https://github.c
 \begin{lstlisting}
 python -m http.server 8000
 \end{lstlisting}
+and open \href{http://localhost:8000}{http://localhost:8000} in your browser
 \end{itemize}
 
 \end{column}
-\begin{column}{0.4\textwidth}
+\begin{column}{0.35\textwidth}
 \begin{center}
-\vspace*{-0.25cm}
+\vspace*{-0.35cm}
 \includegraphics[width=\textwidth]{oxviewer.png}
 \end{center}
 \end{column}
@@ -751,7 +752,7 @@ mv generated.dat dsDNA_init.dat
 \frametitle{(1) Creating an Initial Configuration}
 
 \begin{itemize}
-\item Download the topology and configuration files to your local host in a working directory.
+\item Download the topology file \texttt{dsDNA\_init.top} and configuration file \texttt{dsDNA\_init.dat} into a working directory on your local host.
 \begin{lstlisting}
 scp username@hostname:/path/to/oxDNA_tutorial/exercises/ \
       1_initial_config/dsDNA_init* /your/working/directory/
@@ -760,22 +761,22 @@ scp username@hostname:/path/to/oxDNA_tutorial/exercises/ \
 
 \begin{columns}
 
-\begin{column}{0.48\textwidth}
+\begin{column}{0.55\textwidth}
 
 \begin{itemize}
 \setlength\itemsep{15pt}
+\vspace*{-4.5cm}
 \item Open oxView in your browser,\\
-click on the 'Open' tab,\\
+\href{https://sulcgroup.github.io/oxdna-viewer}{https://sulcgroup.github.io/oxdna-viewer}\\[3pt]
+click on the 'Open' tab,\\[3pt]
 navigate to your local working directory where you saved the two files and load them.
 
 \item Inspect and edit the visualisation, e.g. by rotating and translating the dsDNA molecule.
 \end{itemize}
 \end{column}
 
-\begin{column}{0.48\textwidth}
-
+\begin{column}{0.4\textwidth}
 \includegraphics[width=\textwidth]{oxView_dsDNA_init.png}
-
 \end{column}
 \end{columns}
 
@@ -787,11 +788,11 @@ navigate to your local working directory where you saved the two files and load 
 In this exercise we want to equilibrate the initial configuration using the Virtual-Move Monte Carlo (VMMC) algorithm provided in the standalone code.\\[7pt]
 
 \begin{itemize}
-\item Copy the topology and configuration file into the directory for the second exercise and navigate to this directory.
+\item Copy the topology and configuration file as well as the \texttt{oxDNA} executable into the directory for the second exercise and navigate to this directory.
 \begin{lstlisting}
 cp /exercises/1_initial_config/dsDNA_init.* \ 
     /exercises/2_MC_equilibration
-cd /exercises/2_MC_equilibration
+cp /oxDNA/build/bin/oxDNA /exercises/2_MC_equilibration
 \end{lstlisting}
 \item Perform a VMMC run with the oxDNA standalone code on a single CPU using the \texttt{input} input file.
 \linespread{0.4}
@@ -817,10 +818,10 @@ The columns correspond to MC step, potential energy per nucleotide, acceptance r
 \frametitle{(2) Equilibration Using The Standalone Code}
 
 \begin{itemize}
-\item Download the \texttt{dsDNA\_equ.dat} configuration file to your local host in a working directory.
+\item Download the configuration file \texttt{dsDNA\_equ.dat} into a working directory on your local host.
 \begin{lstlisting}
 scp username@hostname:/path/to/oxDNA_tutorial/exercises/ \
-      2_MC_equilibration/dsDNA_equ.dat ./your/working/directory
+      2_MC_equilibration/dsDNA_equ.dat /your/working/directory
 \end{lstlisting}
 \end{itemize}
 
@@ -914,9 +915,9 @@ The first edit is necessary so we can monitor the potential energy in the FENE b
 \begin{itemize}
 \item Perform an MD run with LAMMPS on 8 CPUs using the \texttt{in.dsDNA.lmp} input file.
 \begin{lstlisting}
-mpirun -np 8 ./lmp_mpi < in.dsDNA.lmp 
-LAMMPS (23 Jun 2022 - Update 1)
-WARNING: Atom style hybrid defines both, per-type and per-atom masses; both must be set, but only per-atom masses will be used (../atom_vec_hybrid.cpp:133)
+mpirun -np 8 ./lmp_mpi -in in.dsDNA.lmp 
+LAMMPS (2 Aug 2023 - Update 3)
+WARNING: Atom style hybrid defines both, per-type and per-atom masses; both must be set, but only per-atom masses will be used (../atom_vec_hybrid.cpp:132)
 Reading data file ...
   orthogonal box = (-50 -50 -50) to (50 50 50)
 ...
@@ -991,14 +992,18 @@ optional arguments:
 \begin{frame}[fragile]
 \frametitle{(4) oxDNA Analysis Tools}
 
-Calculate the mean structure of VMMC equilibration in \texttt{/exercises/2\_MC\_equilibration}
-
+\begin{itemize}
+\item Calculate the mean structure of VMMC equilibration in \texttt{/exercises/2\_MC\_equilibration}\\
 \begin{lstlisting}
-oat mean -p 4 -o dsDNA_equ_mean.png dsDNA_equ.dat 
+oat mean -p 4 -o dsDNA_equ_mean.dat dsDNA_equ.dat 
 \end{lstlisting}
-\includegraphics[width=\textwidth]{oxView_dsDNA_mean_config.png}
+\item Visualise with oxView
+\end{itemize}
 
-Requires dsDNA configuration as input for meaningful orientational averaging 
+\begin{center}
+\includegraphics[width=0.8\textwidth]{oxView_dsDNA_mean_config.png}\\
+Requires dsDNA configuration as input for meaningful orientational averaging
+\end{center}
 
 \end{frame}
 
@@ -1034,11 +1039,13 @@ optional arguments:
 \begin{frame}[fragile]
 \frametitle{(4) oxDNA Analysis Tools}
 
-Calculate the ensemble of distances between the first and second and the second and third nucleotide
-
+\begin{itemize}
+\item Calculate the ensemble of distances between the first and second and the second and third nucleotide
 \begin{lstlisting}
 oat distance -p 4 -f both -i data.dsDNA.1.lmp.oxdna 0 1 1 2 -o distance_dsDNA.1.png
 \end{lstlisting}
+\end{itemize}
+
 \begin{center}
 \includegraphics[width=0.49\textwidth]{distance_dsDNA_traj.1.png}
 \includegraphics[width=0.49\textwidth]{distance_dsDNA_hist.1.png}\\
